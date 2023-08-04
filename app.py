@@ -14,4 +14,8 @@ CORS(app)
 
 
 if __name__ == "__main__":
-    app.run()
+    #Local test
+    #app.run()
+    
+    #Prod
+    app.run(host='0.0.0.0', port=5050)
