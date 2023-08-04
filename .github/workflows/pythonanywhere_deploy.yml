@@ -28,10 +28,10 @@ jobs:
     - name: Deploy to PythonAnywhere
       run: |
         # Stop the existing app
-        pa_web_app.py --username=speedocare --password=speedocare123 stop your_web_app
+        pa_web_app.py --username=speedocare --password=speedocare123 stop flask_speedocare_api
 
         # Deploy the new code
-        rsync -av --delete ./your_flask_app speedocare@ssh.pythonanywhere.com:/path/to/your_flask_app
+        rsync -av --delete ./your_flask_app speedocare@ssh.pythonanywhere.com:/path/to/flask_speedocare_api
 
         # Start the app
-        pa_web_app.py --username=speedocare --password=speedocare123 start your_web_app
+        pa_web_app.py --username=speedocare --password=speedocare123 start flask_speedocare_api
