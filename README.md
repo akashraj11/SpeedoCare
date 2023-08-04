@@ -24,9 +24,10 @@
 > Install [Pipfile]
 >> pip install Pipfile
 
+> Install [Pipfile]
+>> pip install pymysql
+
 > Run:
-
-> > pip install Pipfile
-
+Run the app.py file to run the application
 ## Notes
 
