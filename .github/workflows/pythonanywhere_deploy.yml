@@ -31,7 +31,7 @@ jobs:
         app.py --username=speedocare --password=speedocare123 stop flask_speedocare_api
 
         # Deploy the new code
-        rsync -av --delete ./your_flask_app speedocare@ssh.pythonanywhere.com:/path/to/flask_speedocare_api
+        rsync -av --delete ./flask_speedocare_api speedocare@ssh.pythonanywhere.com:/home/speedocare/flask_speedocare_api
 
         # Start the app
         app.py --username=speedocare --password=speedocare123 start flask_speedocare_api
