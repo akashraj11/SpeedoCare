@@ -1,0 +1,37 @@
+# .github/workflows/pythonanywhere_deploy.yml
+
+name: Deploy to PythonAnywhere
+
+on:
+  push:
+    branches:
+      - Akashraj_Dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Deploy to PythonAnywhere
+      run: |
+        # Stop the existing app
+        pa_web_app.py --username=speedocare --password=speedocare123 stop your_web_app
+
+        # Deploy the new code
+        rsync -av --delete ./your_flask_app speedocare@ssh.pythonanywhere.com:/path/to/your_flask_app
+
+        # Start the app
+        pa_web_app.py --username=speedocare --password=speedocare123 start your_web_app
