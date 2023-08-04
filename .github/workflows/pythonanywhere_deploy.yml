@@ -28,10 +28,11 @@ jobs:
     - name: Deploy to PythonAnywhere
       run: |
         # Stop the existing app
-        pa_web_app.py --username=speedocare --password=speedocare123 stop flask_speedocare_api
-
+        curl "https://www.pythonanywhere.com/api/v0/user/speedocare/webapps/flask_speedocare_api/stop/" -X POST --user "speedocar:5f424a8cc597c3954ca7b614b0bccac0ca19a4ce"
+      
         # Deploy the new code
-        rsync -av --delete /home/speedocare/flask_speedocare_api speedocare@ssh.pythonanywhere.com:/home/speedocare/flask_speedocare_api
-
+        rsync -av --delete /home/speedocare/flask_speedocare_api speedocare@ssh.pythonanywhere.com:/home/speedocare/
+      
         # Start the app
-        pa_web_app.py --username=speedocare --password=speedocare123 start flask_speedocare_api
+        curl "https://www.pythonanywhere.com/api/v0/user/speedocare/webapps/flask_speedocare_api/start/" -X POST --user "speedocare:5f424a8cc597c3954ca7b614b0bccac0ca19a4ce"
+      
