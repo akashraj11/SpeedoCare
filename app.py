@@ -12,7 +12,6 @@ app.register_blueprint(api_blueprint, url_prefix='/speedocare')
 
 CORS(app)
 
-
 if __name__ == "__main__":
     #Local test
     #app.run()

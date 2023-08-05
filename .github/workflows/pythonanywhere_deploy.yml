@@ -28,7 +28,7 @@ jobs:
     - name: Deploy to PythonAnywhere
       run: |
         # Stop the existing app
-        curl "https://www.pythonanywhere.com/api/v0/user/speedocare/webapps/flask_speedocare_api/stop/" -X POST --user "speedocar:5f424a8cc597c3954ca7b614b0bccac0ca19a4ce"
+        curl "https://www.pythonanywhere.com/api/v0/user/speedocare/webapps/flask_speedocare_api/stop/" -X POST --user "speedocare:5f424a8cc597c3954ca7b614b0bccac0ca19a4ce"
       
         # Deploy the new code
         rsync -av --delete /home/speedocare/flask_speedocare_api speedocare@ssh.pythonanywhere.com:/home/speedocare/
