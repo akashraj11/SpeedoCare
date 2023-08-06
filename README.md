@@ -39,6 +39,9 @@
 > Install [flask_cors]
 >> pip install flask_cors
 
+> Install [flask_login]
+>> pip install flask_login
+
 > Run:
 1. Run the app.py file to run the application
 
