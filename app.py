@@ -1,21 +1,43 @@
 from flask import Flask
-import mysql.connector
-from mysql.connector import Error
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-from API.routes.UserRoutes import api_blueprint
+from flask_login import LoginManager
+from API.routes.UserRoutes import user_blueprint
+from API.routes.LoginRoute import login_blueprint
+from API.database.models.UserModel import User
+from API.database.connection.config import get_connection
+from API.database.models.UserModel import User
 
 # Define root path as /speedocare/
 app = Flask(__name__, root_path="/speedocare")
 app.debug = True  # Turn on debug mode
-app.register_blueprint(api_blueprint, url_prefix='/speedocare')
+app.secret_key = 'speedocare_secret_key'
+app.register_blueprint(user_blueprint, url_prefix='/speedocare')
+app.register_blueprint(login_blueprint, url_prefix='/speedocare')
 
 CORS(app)
 
+login_manager = LoginManager(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    # Replace this function with the logic to load a user from the database
+    # For example, execute a SELECT query on the users table using user_id
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM users WHERE user_id = %s", (user_id,))
+    row = cursor.fetchone()
+    cursor.close()
+    connection.close()
+
+    if row:
+        return User(*row)
+    else:
+        return None
+
 
 if __name__ == "__main__":
-    #Local test
-    #app.run()
-    
-    #Prod
-    app.run(host='0.0.0.0', port=5050)
+    # Local test
+    app.run()
+
+    # Prod
+    # app.run(host='0.0.0.0', port=5050)
