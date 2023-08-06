@@ -4,6 +4,7 @@ from mysql.connector import Error
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from API.routes.UserRoutes import api_blueprint
+from API.routes.notificationRoutes import api_blueprint
 
 # Define root path as /speedocare/
 app = Flask(__name__, root_path="/speedocare")
