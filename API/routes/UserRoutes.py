@@ -14,10 +14,10 @@ from API.common.helperFunction import user_to_dict
 from API.database.connection.config import get_connection
 from flask import Blueprint
 
-api_blueprint = Blueprint('api', __name__)
+user_blueprint = Blueprint('user', __name__)
 
 # Create a new user with nested objects
-@api_blueprint.route("/users", methods=["POST"])
+@user_blueprint.route("/users", methods=["POST"])
 def create_user():
     try:
         data = request.get_json()
@@ -136,7 +136,7 @@ def create_user():
         return jsonify({"message": "Error creating the user with nested objects"}), 500
 
 # Get all users with nested objects
-@api_blueprint.route("/users", methods=["GET"])
+@user_blueprint.route("/users", methods=["GET"])
 def get_all_user():
     try:
         connection = get_connection()
@@ -182,9 +182,8 @@ def get_all_user():
         print("Error:", e)
         return jsonify({"message": "Error fetching users"}), 500
 
-
 # Get a user by ID with nested objects
-@api_blueprint.route("/users/<int:user_id>", methods=["GET"])
+@user_blueprint.route("/users/<int:user_id>", methods=["GET"])
 def get_user_by_id(user_id):
     try:
         connection = get_connection()
@@ -229,9 +228,8 @@ def get_user_by_id(user_id):
         print("Error:", e)
         return jsonify({"message": "Error fetching the user"}), 500
 
-
 # Delete a user by ID with nested objects
-@api_blueprint.route("/users/<int:user_id>", methods=["DELETE"])
+@user_blueprint.route("/users/<int:user_id>", methods=["DELETE"])
 def delete_user_by_id(user_id):
     try:
         connection = get_connection()
@@ -265,9 +263,8 @@ def delete_user_by_id(user_id):
         print("Error:", e)
         return jsonify({"message": "Error deleting the user and nested objects"}), 500
 
-
 # Delete all users and nested objects
-@api_blueprint.route("/users/all", methods=["DELETE"])
+@user_blueprint.route("/users/all", methods=["DELETE"])
 def delete_all_users():
     try:
         connection = get_connection()
@@ -297,9 +294,8 @@ def delete_all_users():
         print("Error:", e)
         return jsonify({"message": "Error deleting all users and nested objects"}), 500
 
-
 # Update a user by ID with nested objects
-@api_blueprint.route("/users/<int:user_id>", methods=["PUT"])
+@user_blueprint.route("/users/<int:user_id>", methods=["PUT"])
 def update_user_by_id(user_id):
     try:
         data = request.get_json()

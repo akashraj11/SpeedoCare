@@ -13,3 +13,15 @@ class User:
         self.patient = None
         self.clinic_admin = None
         self.doctor = None
+        
+    def get_id(self):
+        return str(self.user_id)
+
+    def is_authenticated(self):
+        return True  # Replace with your logic for user authentication
+
+    def is_active(self):
+        return True  # Replace with your logic for active/inactive users
+
+    def is_anonymous(self):
+        return False        
