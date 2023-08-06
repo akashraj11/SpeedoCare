@@ -408,3 +408,40 @@ def update_user_by_id(user_id):
     except Exception as e:
         print("Error:", e)
         return jsonify({"message": "Error updating the user with nested objects"}), 500
+
+# Search users by first name, last name, or user role
+@user_blueprint.route("/users/search", methods=["GET"])
+def search_users():
+    first_name = request.args.get("first_name")
+    last_name = request.args.get("last_name")
+    user_role = request.args.get("user_role")
+
+    # Replace this function with the logic to search users in the database based on the provided parameters
+    # For example, execute a SELECT query on the users table with appropriate WHERE conditions
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    query = "SELECT * FROM users WHERE 1"
+    parameters = []
+
+    if first_name:
+        query += " AND first_name LIKE %s"
+        parameters.append(f"%{first_name}%")
+
+    if last_name:
+        query += " AND last_name LIKE %s"
+        parameters.append(f"%{last_name}%")
+
+    if user_role:
+        query += " AND user_role = %s"
+        parameters.append(user_role)
+
+    cursor.execute(query, tuple(parameters))
+    users_data = cursor.fetchall()
+    cursor.close()
+    connection.close()
+
+    # Convert the fetched data to a list of dictionaries
+    users_list = [user_to_dict(User(*data)) for data in users_data]
+
+    return jsonify(users_list), 200
