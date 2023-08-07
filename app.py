@@ -3,12 +3,10 @@ from flask_cors import CORS
 from flask_login import LoginManager
 from API.routes.UserRoutes import user_blueprint
 from API.routes.LoginRoute import login_blueprint
+from API.routes.notificationRoutes import notification_blueprint
 from API.routes.ClinicRoute import clinic_blueprint
-
-
 from API.database.models.UserModel import User
 from API.database.connection.config import get_connection
-from API.database.models.UserModel import User
 
 # Define root path as /speedocare/
 app = Flask(__name__, root_path="/speedocare")
@@ -16,7 +14,9 @@ app.debug = True  # Turn on debug mode
 app.secret_key = 'speedocare_secret_key'
 app.register_blueprint(user_blueprint, url_prefix='/speedocare')
 app.register_blueprint(login_blueprint, url_prefix='/speedocare')
+app.register_blueprint(notification_blueprint, url_prefix='/speedocare')
 app.register_blueprint(clinic_blueprint, url_prefix='/speedocare')
+
 
 CORS(app)
 
