@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "f3ed1518-6fef-42f0-997b-47d4371d5256",
+		"name": "Speedocare_notifications",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28887753"
+	},
+	"item": [
+		{
+			"name": "Get Allnotifications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/notifications",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"notifications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Createnotifications",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"notification_date\": \"2023-08-05\",\r\n  \"user_id\": 1,\r\n  \"from_\": \"sender@example.com\",\r\n  \"to_\": \"recipient@example.com\",\r\n  \"cc\": \"cc@example.com\",\r\n  \"bcc\": \"bcc@example.com\",\r\n  \"subject\": \"Test Notification\",\r\n  \"body\": \"This is a test notification.\",\r\n  \"digital_image\": \"https://example.com/image.png\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/notifications",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"notifications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get notification by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/notifications/notify/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"notifications",
+						"notify",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Notification by Id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"notification_date\": \"2023-08-05\",\r\n  \"user_id\": 1,\r\n  \"from_\": \"updated_sender@example.com\",\r\n  \"to_\": \"updated_recipient@example.com\",\r\n  \"cc\": \"updated_cc@example.com\",\r\n  \"bcc\": \"updated_bcc@example.com\",\r\n  \"subject\": \"Updated Test Notification 3 third time\",\r\n  \"body\": \"This is an updated test notification.\",\r\n  \"digital_image\": \"https://example.com/updated_image.png\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/notifications/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"notifications",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update notification by userId",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"notification_date\": \"2023-08-05\",\r\n    \"from_\": \"updated_sender@example.com\",\r\n    \"to_\": \"updated_recipient@example.com\",\r\n    \"cc\": \"updated_cc@example.com\",\r\n    \"bcc\": \"updated_bcc@example.com\",\r\n    \"subject\": \"Updated Test Notification\",\r\n    \"body\": \"This is an updated test notification for user\",\r\n    \"digital_image\": \"https://example.com/updated_image.png\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/notifications/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"notifications",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/notifications/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"notifications",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update UIDNID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"notification_date\": \"2023-08-06\",\r\n    \"from_\": \"sender2@example.com\",\r\n    \"to_\": \"recipient2@example.com\",\r\n    \"cc\": \"cc2@example.com\",\r\n    \"bcc\": \"bcc2@example.com\",\r\n    \"subject\": \"Test Notification 2\",\r\n    \"body\": \"This is an updated test notification for user2 and Notification4.\",\r\n    \"digital_image\": \"https://example.com/updated_image.png\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/notifications/2/4\n",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"notifications",
+						"2",
+						"4\n"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
