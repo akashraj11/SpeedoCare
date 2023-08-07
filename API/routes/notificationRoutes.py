@@ -8,10 +8,7 @@ from flask import Blueprint
 
 api_blueprint = Blueprint('api', __name__)
 
-
-# Get all notifications
-@api_blueprint.route("/notifications", methods=["GET"])
-# Get all notifications
+#Fetch all notifications
 @api_blueprint.route("/notifications", methods=["GET"])
 def get_notifications():
     try:
@@ -100,8 +97,10 @@ def create_notification():
         return jsonify({"message": "Error creating the notification"}), 500
     
 # Get a specific notification by notification_id
-@api_blueprint.route('/notifications/<int:notification_id>', methods=['GET'])
-def get_notification(notification_id):
+@api_blueprint.route('/notifications/notify/<int:notification_id>', methods=['GET'])
+def get_notification_by_id(notification_id):
+#@api_blueprint.route('/notifications/<int:notification_id>', methods=['GET'])
+#def get_notification(notification_id):
     try:
         connection = get_connection()
         if connection is None:
@@ -211,3 +210,184 @@ def update_notification(notification_id):
     except Exception as e:
         print("Error:", e)
         return jsonify({"message": "Error updating the notification"}), 500
+    
+    
+# Get notifications by user_id
+@api_blueprint.route('/notifications/user/<int:user_id>', methods=['GET'])
+def get_notifications_by_user(user_id):
+    try:
+        print("Attempting to retrieve notifications for user_id:", user_id)
+
+        connection = get_connection()
+        if connection is None:
+            return jsonify({"message": "Error connecting to the database"}), 500
+
+        cursor = connection.cursor()
+
+        query = "SELECT * FROM notifications WHERE user_id = %s"
+        cursor.execute(query, (user_id,))
+        result = cursor.fetchall()
+
+        print("Query result:", result)
+
+        if not result:
+            print("No notifications found for user_id:", user_id)
+            return jsonify({"message": "No notifications found for the given user_id."}), 404
+
+        notifications_data = []
+        for row in result:
+            notification = {
+                "notification_id": row[0],        # Access columns by index
+                "notification_date": row[1],
+                "user_id": row[2],
+                "from_": row[3],                  # Access columns by index
+                "to_": row[4],                    # Access columns by index
+                "cc": row[5],
+                "bcc": row[6],
+                "subject": row[7],
+                "body": row[8],
+                "digital_image": row[9],
+            }
+            notifications_data.append(notification)
+
+        cursor.close()
+        connection.close()
+
+        print("Notifications retrieved successfully for user_id:", user_id)
+        return jsonify(notifications_data), 200
+
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"message": "Error retrieving notifications for the user"}), 500
+
+# Update notifications by user_id
+@api_blueprint.route("/notifications/user/<int:user_id>", methods=["PUT"])
+def update_notifications_by_user(user_id):
+    data = request.get_json()
+
+    try:
+        connection = get_connection()
+        if connection is None:
+            return jsonify({"message": "Error connecting to the database"}), 500
+
+        cursor = connection.cursor()
+
+        query = "SELECT * FROM notifications WHERE user_id = %s"
+        cursor.execute(query, (user_id,))
+        results = cursor.fetchall()
+
+        if not results:
+            return jsonify({"message": "No notifications found for the given user_id."}), 404
+
+        notifications = []
+        for result in results:
+            notification = {
+                "notification_id": result[0],      # Access columns by index
+                "notification_date": result[1],
+                "user_id": result[2],
+                "from_": result[3],                # Access columns by index
+                "to_": result[4],                  # Access columns by index
+                "cc": result[5],
+                "bcc": result[6],
+                "subject": result[7],
+                "body": result[8],
+                "digital_image": result[9],
+            }
+            notifications.append(notification)
+
+        # Update all notifications for the user with the new data
+        for notification in notifications:
+            notification['notification_date'] = data['notification_date']
+            notification['from_'] = data['from_']
+            notification['to_'] = data['to_']
+            notification['cc'] = data['cc']
+            notification['bcc'] = data['bcc']
+            notification['subject'] = data['subject']
+            notification['body'] = data['body']
+            notification['digital_image'] = data['digital_image']
+
+        # Update the notifications in the database
+        cursor = connection.cursor()
+
+        query = "UPDATE notifications SET notification_date = %s, from_ = %s, to_ = %s, cc = %s, bcc = %s, subject = %s, body = %s, digital_image = %s WHERE user_id = %s"
+        values_list = [(n['notification_date'], n['from_'], n['to_'], n['cc'], n['bcc'], n['subject'], n['body'], n['digital_image'], user_id) for n in notifications]
+
+        cursor.executemany(query, values_list)
+        connection.commit()
+        cursor.close()
+        connection.close()
+
+        return jsonify(notifications), 200
+
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"message": "Error updating notifications for the user"}), 500
+
+ # Update a notification by User_id and then specific notification_id
+# Update a specific notification for a user by notification_id
+@api_blueprint.route("/notifications/<int:user_id>/<int:notification_id>", methods=["PUT"])
+def update_notification_for_user(user_id, notification_id):
+    data = request.get_json()
+
+    try:
+        connection = get_connection()
+        if connection is None:
+            return jsonify({"message": "Error connecting to the database"}), 500
+
+        cursor = connection.cursor()
+
+        query = "SELECT * FROM notifications WHERE user_id = %s AND notification_id = %s"
+        cursor.execute(query, (user_id, notification_id))
+        result = cursor.fetchone()
+
+        if not result:
+            return jsonify({"message": "Notification not found for the given user_id and notification_id."}), 404
+
+        notification = {
+            "notification_id": result[0],      # Access columns by index
+            "notification_date": result[1],
+            "user_id": result[2],
+            "from_": result[3],                # Access columns by index
+            "to_": result[4],                  # Access columns by index
+            "cc": result[5],
+            "bcc": result[6],
+            "subject": result[7],
+            "body": result[8],
+            "digital_image": result[9],
+        }
+
+        # Update the notification with the new data
+        notification['notification_date'] = data['notification_date']
+        notification['from_'] = data['from_']
+        notification['to_'] = data['to_']
+        notification['cc'] = data['cc']
+        notification['bcc'] = data['bcc']
+        notification['subject'] = data['subject']
+        notification['body'] = data['body']
+        notification['digital_image'] = data['digital_image']
+
+        # Update the notification in the database
+        query = "UPDATE notifications SET notification_date = %s, from_ = %s, to_ = %s, cc = %s, bcc = %s, subject = %s, body = %s, digital_image = %s WHERE user_id = %s AND notification_id = %s"
+        values = (
+            notification['notification_date'],
+            notification['from_'],
+            notification['to_'],
+            notification['cc'],
+            notification['bcc'],
+            notification['subject'],
+            notification['body'],
+            notification['digital_image'],
+            user_id,
+            notification_id
+        )
+
+        cursor.execute(query, values)
+        connection.commit()
+        cursor.close()
+        connection.close()
+
+        return jsonify(notification), 200
+
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"message": "Error updating the notification for the user"}), 500
