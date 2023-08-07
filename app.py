@@ -14,12 +14,9 @@ app.debug = True  # Turn on debug mode
 app.secret_key = 'speedocare_secret_key'
 app.register_blueprint(user_blueprint, url_prefix='/speedocare')
 app.register_blueprint(login_blueprint, url_prefix='/speedocare')
-<<<<<<< HEAD
 app.register_blueprint(notification_blueprint, url_prefix='/speedocare')
-
-=======
 app.register_blueprint(clinic_blueprint, url_prefix='/speedocare')
->>>>>>> main
+
 
 CORS(app)
 
