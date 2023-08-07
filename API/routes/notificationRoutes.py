@@ -6,10 +6,10 @@ from API.database.models.NotificationModel import Notification
 from API.database.connection.config import get_connection
 from flask import Blueprint
 
-api_blueprint = Blueprint('api', __name__)
+notification_blueprint = Blueprint('notifications', __name__)
 
 #Fetch all notifications
-@api_blueprint.route("/notifications", methods=["GET"])
+@notification_blueprint.route("/notifications", methods=["GET"])
 def get_notifications():
     try:
         connection = get_connection()
@@ -50,7 +50,7 @@ def get_notifications():
 
 
 # Create a new notification
-@api_blueprint.route("/notifications", methods=["POST"])
+@notification_blueprint.route("/notifications", methods=["POST"])
 def create_notification():
     try:
         data = request.get_json()
@@ -97,7 +97,7 @@ def create_notification():
         return jsonify({"message": "Error creating the notification"}), 500
     
 # Get a specific notification by notification_id
-@api_blueprint.route('/notifications/notify/<int:notification_id>', methods=['GET'])
+@notification_blueprint.route('/notifications/notify/<int:notification_id>', methods=['GET'])
 def get_notification_by_id(notification_id):
 #@api_blueprint.route('/notifications/<int:notification_id>', methods=['GET'])
 #def get_notification(notification_id):
@@ -137,7 +137,7 @@ def get_notification_by_id(notification_id):
         return jsonify({"message": "Error retrieving the notification"}), 500
     
 # Update a notification by notification_id
-@api_blueprint.route('/notifications/<int:notification_id>', methods=['PUT'])
+@notification_blueprint.route('/notifications/<int:notification_id>', methods=['PUT'])
 def update_notification(notification_id):
     data = request.get_json()
     
@@ -213,7 +213,7 @@ def update_notification(notification_id):
     
     
 # Get notifications by user_id
-@api_blueprint.route('/notifications/user/<int:user_id>', methods=['GET'])
+@notification_blueprint.route('/notifications/user/<int:user_id>', methods=['GET'])
 def get_notifications_by_user(user_id):
     try:
         print("Attempting to retrieve notifications for user_id:", user_id)
@@ -261,7 +261,7 @@ def get_notifications_by_user(user_id):
         return jsonify({"message": "Error retrieving notifications for the user"}), 500
 
 # Update notifications by user_id
-@api_blueprint.route("/notifications/user/<int:user_id>", methods=["PUT"])
+@notification_blueprint.route("/notifications/user/<int:user_id>", methods=["PUT"])
 def update_notifications_by_user(user_id):
     data = request.get_json()
 
@@ -325,7 +325,7 @@ def update_notifications_by_user(user_id):
 
  # Update a notification by User_id and then specific notification_id
 # Update a specific notification for a user by notification_id
-@api_blueprint.route("/notifications/<int:user_id>/<int:notification_id>", methods=["PUT"])
+@notification_blueprint.route("/notifications/<int:user_id>/<int:notification_id>", methods=["PUT"])
 def update_notification_for_user(user_id, notification_id):
     data = request.get_json()
 
