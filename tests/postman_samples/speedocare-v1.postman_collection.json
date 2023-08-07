@@ -77,6 +77,101 @@
 			"response": []
 		},
 		{
+			"name": "GET USER By Fname, Lname and role",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/users/search?first_name=Jane",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "first_name",
+							"value": "Jane"
+						},
+						{
+							"key": "user_role",
+							"value": "Doctor",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET USER By Doctor and clinic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/users//doctors/clinic/12345",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"users",
+						"",
+						"doctors",
+						"clinic",
+						"12345"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET USER By Doctor and specialization",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/users/doctors/specialization/Ortho",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"users",
+						"doctors",
+						"specialization",
+						"Ortho"
+					],
+					"query": [
+						{
+							"key": "user_role",
+							"value": "Doctor",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "POST patient",
 			"request": {
 				"method": "POST",
@@ -211,7 +306,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"jack_doe\",\r\n    \"first_name\": \"Jack\",\r\n    \"last_name\": \"Doe\",\r\n    \"contact_no\": \"8765432109\",\r\n    \"email\": \"jack.doe@example.com\",\r\n    \"encrypted_password\": \"yet_another_encrypted_password\",\r\n    \"address\": \"789 Elm Street\",\r\n    \"date_of_birth\": \"1992-12-25\",\r\n    \"user_role\": \"ClinicAdmin\",\r\n    \"clinic_admin\": {\r\n        \"clinic_internal_id\": \"CLINIC123\",\r\n        \"clinic_id\": 54321\r\n    }\r\n}\r\n",
+					"raw": "{\r\n    \"username\": \"jack_doe\",\r\n    \"first_name\": \"Jack\",\r\n    \"last_name\": \"Doe\",\r\n    \"contact_no\": \"8765432109\",\r\n    \"email\": \"jack.doe@example.com\",\r\n    \"encrypted_password\": \"yet_another_encrypted_password\",\r\n    \"address\": \"789 Elm Street\",\r\n    \"date_of_birth\": \"1992-12-25\",\r\n    \"user_role\": \"ClinicAdmin\",\r\n    \"clinic_admin\": {\r\n        \"clinic_internal_id\": \"CLINIC123\",\r\n        \"clinic_id\": 12345\r\n    }\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"

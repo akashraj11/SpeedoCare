@@ -153,7 +153,7 @@ def get_all_user():
             cursor.execute("SELECT * FROM patients WHERE user_id=%s", (user.user_id,))
             patient_data = cursor.fetchone()
             if patient_data:
-                patient = create_patient_object(patient_data[0], patient_data[1:])
+                patient = create_patient_object(patient_data)
                 user.patient = patient
 
             cursor.execute(
@@ -161,15 +161,13 @@ def get_all_user():
             )
             clinic_admin_data = cursor.fetchone()
             if clinic_admin_data:
-                clinic_admin = create_clinic_admin_object(
-                    clinic_admin_data[0], clinic_admin_data[1:]
-                )
+                clinic_admin = create_clinic_admin_object(clinic_admin_data)
                 user.clinic_admin = clinic_admin
 
             cursor.execute("SELECT * FROM doctors WHERE user_id=%s", (user.user_id,))
             doctor_data = cursor.fetchone()
             if doctor_data:
-                doctor = create_doctor_object(doctor_data[0], doctor_data[1:])
+                doctor = create_doctor_object(doctor_data)
                 user.doctor = doctor
 
             users.append(user_to_dict(user))
@@ -199,21 +197,19 @@ def get_user_by_id(user_id):
             cursor.execute("SELECT * FROM patients WHERE user_id=%s", (user_id,))
             patient_data = cursor.fetchone()
             if patient_data:
-                patient = create_patient_object(patient_data[0], patient_data[1:])
+                patient = create_patient_object(patient_data)
                 user.patient = patient
 
             cursor.execute("SELECT * FROM clinic_admins WHERE user_id=%s", (user_id,))
             clinic_admin_data = cursor.fetchone()
             if clinic_admin_data:
-                clinic_admin = create_clinic_admin_object(
-                    clinic_admin_data[0], clinic_admin_data[1:]
-                )
+                clinic_admin = create_clinic_admin_object(clinic_admin_data)
                 user.clinic_admin = clinic_admin
 
             cursor.execute("SELECT * FROM doctors WHERE user_id=%s", (user_id,))
             doctor_data = cursor.fetchone()
             if doctor_data:
-                doctor = create_doctor_object(doctor_data[0], doctor_data[1:])
+                doctor = create_doctor_object(doctor_data)
                 user.doctor = doctor
 
             cursor.close()
@@ -445,3 +441,63 @@ def search_users():
     users_list = [user_to_dict(User(*data)) for data in users_data]
 
     return jsonify(users_list), 200
+
+# Get all users with nested objects
+@user_blueprint.route("/users/doctors/specialization/<string:specialization>", methods=["GET"])
+def get_all_doctors_by_specialization(specialization):
+    try:
+        connection = get_connection()
+        if connection is None:
+            return jsonify({"message": "Error connecting to the database"}), 500
+
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM users where user_role='Doctor'")
+        users_data = cursor.fetchall()
+        users = []
+        for user_data in users_data:
+            user = create_user_object(user_data)
+
+            cursor.execute("SELECT * FROM doctors WHERE user_id=%s and specialization=%s", (user.user_id,specialization))
+            doctor_data = cursor.fetchone()
+            if doctor_data:
+                doctor = create_doctor_object(doctor_data)
+                user.doctor = doctor
+                users.append(user_to_dict(user))
+
+        cursor.close()
+        connection.close()
+
+        return jsonify(users), 200
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"message": "Error fetching users"}), 500
+
+# Get all users with nested objects
+@user_blueprint.route("/users/doctors/clinic/<string:clinic_id>", methods=["GET"])
+def get_all_doctors_by_clinic(clinic_id):
+    try:
+        connection = get_connection()
+        if connection is None:
+            return jsonify({"message": "Error connecting to the database"}), 500
+
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM users where user_role='Doctor'")
+        users_data = cursor.fetchall()
+        users = []
+        for user_data in users_data:
+            user = create_user_object(user_data)
+
+            cursor.execute("SELECT * FROM doctors WHERE user_id=%s and clinic_id=%s", (user.user_id,clinic_id))
+            doctor_data = cursor.fetchone()
+            if doctor_data:
+                doctor = create_doctor_object(doctor_data)
+                user.doctor = doctor
+                users.append(user_to_dict(user))
+
+        cursor.close()
+        connection.close()
+
+        return jsonify(users), 200
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"message": "Error fetching users"}), 500
