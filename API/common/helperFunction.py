@@ -21,16 +21,16 @@ def create_user_object(data):
         data[9],
     )
 
-def create_patient_object(patient_id, data):
-    return Patient(patient_id, data[0], data[1], data[2])
+def create_patient_object(data):
+    return Patient(data[0], data[2], data[3], data[4])
 
 
-def create_clinic_admin_object(clinic_admin_id, data):
-    return ClinicAdmin(clinic_admin_id, data[0], data[1])
+def create_clinic_admin_object(data):
+    return ClinicAdmin(data[0], data[2], data[3])
 
 
-def create_doctor_object(doctor_id, data):
-    return Doctor(doctor_id, data[0], data[1])
+def create_doctor_object(data):
+    return Doctor(data[0], data[2], data[3])
 
 
 # For Post Using dict
