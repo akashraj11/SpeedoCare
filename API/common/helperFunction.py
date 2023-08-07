@@ -6,6 +6,7 @@ from API.database.models.UserModel import User
 from API.database.models.DoctorModel import Doctor
 from API.database.models.PatientModel import Patient
 
+
 # Helper functions for converting model objects to dictionaries and vice versa
 def create_user_object(data):
     return User(
@@ -81,3 +82,5 @@ def user_to_dict(user):
             "specialization": user.doctor.specialization,
         }
     return user_dict
+
+
