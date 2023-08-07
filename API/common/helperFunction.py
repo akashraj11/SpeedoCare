@@ -5,7 +5,7 @@ from API.database.models.ClinicAdminModel import ClinicAdmin
 from API.database.models.UserModel import User
 from API.database.models.DoctorModel import Doctor
 from API.database.models.PatientModel import Patient
-from API.database.connection.config import get_connection
+
 
 # Helper functions for converting model objects to dictionaries and vice versa
 def create_user_object(data):
@@ -84,77 +84,3 @@ def user_to_dict(user):
     return user_dict
 
 
-
-#Clinic
-
-    @classmethod
-    def from_db(cls, data):
-        return cls(*data)
-
-    def to_dict(self):
-        return {
-            "clinic_id": self.clinic_id,
-            "Location": self.Location,
-            "clinic_name": self.clinic_name,
-            "description": self.description,
-        }
-
-    @classmethod
-    def get_all_clinics(cls):
-        connection = get_connection()
-        cursor = connection.cursor()
-
-        cursor.execute("SELECT * FROM clinics")
-        clinics_data = cursor.fetchall()
-        cursor.close()
-        connection.close()
-
-        return [cls.from_db(data) for data in clinics_data]
-
-    @classmethod
-    def get_clinic_by_id(cls, clinic_id):
-        connection = get_connection()
-        cursor = connection.cursor()
-
-        cursor.execute("SELECT * FROM clinics WHERE clinic_id = %s", (clinic_id,))
-        clinic_data = cursor.fetchone()
-        cursor.close()
-        connection.close()
-
-        if clinic_data:
-            return cls.from_db(clinic_data)
-        else:
-            return None
-
-    def save(self):
-        connection = get_connection()
-        cursor = connection.cursor()
-
-        cursor.execute(
-            "INSERT INTO clinics (Location, clinic_name, description) VALUES (%s, %s, %s)",
-            (self.Location, self.clinic_name, self.description),
-        )
-        connection.commit()
-        cursor.close()
-        connection.close()
-
-    def update(self):
-        connection = get_connection()
-        cursor = connection.cursor()
-
-        cursor.execute(
-            "UPDATE clinics SET Location = %s, clinic_name = %s, description = %s WHERE clinic_id = %s",
-            (self.Location, self.clinic_name, self.description, self.clinic_id),
-        )
-        connection.commit()
-        cursor.close()
-        connection.close()
-
-    def delete(self):
-        connection = get_connection()
-        cursor = connection.cursor()
-
-        cursor.execute("DELETE FROM clinics WHERE clinic_id = %s", (self.clinic_id,))
-        connection.commit()
-        cursor.close()
-        connection.close()
