@@ -27,7 +27,25 @@
 > Install [Pipfile]
 >> pip install pymysql
 
+> Install [Flask]
+>> pip install Flask
+
+> Install [SQLAlchemy]
+>> pip install SQLAlchemy
+
+> Install [pymysql]
+>> pip install pymysql
+
+> Install [flask_cors]
+>> pip install flask_cors
+
+> Install [flask_login]
+>> pip install flask_login
+
 > Run:
-Run the app.py file to run the application
+1. Run the app.py file to run the application
+
+## Testing
+Import the Postman collection from /tests in postman to test the existing APIs after executing the code.
 ## Notes
 

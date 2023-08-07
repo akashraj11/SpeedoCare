@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 db_config = {
     "host": "localhost",
     "port": 3306,
@@ -5,3 +6,5 @@ db_config = {
     "password": "Rahul",
     "database": "speedocare"
 }
+=======
+>>>>>>> main
