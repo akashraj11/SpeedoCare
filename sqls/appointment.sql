@@ -14,3 +14,7 @@ CREATE TABLE appointments (
     FOREIGN KEY (doctor_id) REFERENCES doctors (doctor_id),
     FOREIGN KEY (clinic_id) REFERENCES clinic_admins (clinic_id)
 );
+
+
+ALTER TABLE clinic_admins
+ADD INDEX clinic_admins_clinic_id_idx (clinic_id);
