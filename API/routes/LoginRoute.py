@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import app, request, jsonify
 
 from flask_login import (
     login_user,
@@ -11,9 +11,14 @@ from API.database.models.UserModel import User
 from flask import Blueprint
 from flask import request, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
+from API.database.connection.token_utils import generate_auth_token, store_user_in_session
+from flask import session
 
 login_blueprint = Blueprint('login', __name__)
 
+
+
+# ...
 
 @login_blueprint.route('/login', methods=['POST'])
 def login():
@@ -21,8 +26,6 @@ def login():
     username = data.get('username')
     password = data.get('password')
 
-    # Replace this function with the logic to fetch the user from the database using the username
-    # For example, execute a SELECT query on the users table using the username
     connection = get_connection()
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
@@ -30,10 +33,16 @@ def login():
     cursor.close()
     connection.close()
 
-    if row and password == row[6]:  # Assuming the password is stored in the 7th column of the users table
+    if row and password == row[6]:
         user = User(*row)
-        login_user(user)
-        return jsonify({"message": "Login successful"}), 200
+
+        # Generate a token containing user ID
+        auth_token = generate_auth_token(user.user_id)
+
+        # Store user information in the session
+        store_user_in_session(user.user_id)
+
+        return jsonify({"auth_token": auth_token, "user_id": user.user_id}), 200
     else:
         return jsonify({"message": "Invalid credentials"}), 401
 
@@ -41,7 +50,7 @@ def login():
 @login_blueprint.route('/logout', methods=['POST'])
 @login_required
 def logout():
-    logout_user()
+    session.clear
     return jsonify({"message": "Logout successful"}), 200
 
 
