@@ -54,8 +54,9 @@ def delete_clinic_by_id(clinic_id):
 # GET Clinic by Name
 @clinic_blueprint.route("/clinics/<string:clinic_name>", methods=["GET"])
 def get_clinic_by_name(clinic_name):
-    clinic = Clinic.get_clinic_by_Name(clinic_name)
-    if clinic:
-        return jsonify(clinic.to_dict()), 200
+    clinics = Clinic.get_clinic_by_Name(clinic_name)  # Modify this method to return a list of clinics
+    if clinics:
+        clinic_list = [clinic.to_dict() for clinic in clinics]
+        return jsonify(clinic_list), 200
     else:
-        return jsonify({"message": "Clinic not found"}), 404
+        return jsonify({"message": "Clinics not found"}), 404

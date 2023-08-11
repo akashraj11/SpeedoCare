@@ -51,14 +51,16 @@ class Clinic:
         connection = get_connection()
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM clinics WHERE clinic_name LIKE %s", ('%' + clinic_name + '%',))
-        clinic_data = cursor.fetchone()
+        clinic_data_list = cursor.fetchall()  # Fetch all matching rows
         cursor.close()
         connection.close()
 
-        if clinic_data:
-            return cls.from_db(clinic_data)
-        else:
-            return None
+        clinics = []
+        for clinic_data in clinic_data_list:
+            clinic = cls.from_db(clinic_data)
+            clinics.append(clinic)
+
+        return clinics
 
 
     def save(self):
