@@ -14,9 +14,14 @@ db_config = {
     'host': 'localhost',
     'port': 3306,
     'user': 'root',
+<<<<<<< HEAD
     'password': 'Rahul',
     'database': 'speedocare',
   
+=======
+    'password': 'akashR01*',
+    'database': 'speedocare'
+>>>>>>> 4e98f66a8b930c4e49e4a393c4568b39e549cc33
 }
 
 # Helper function to create a MySQL connection
