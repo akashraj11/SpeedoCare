@@ -15,7 +15,8 @@ db_config = {
     'port': 3306,
     'user': 'root',
     'password': 'Rahul',
-    'database': 'speedocare'
+    'database': 'speedocare',
+  
 }
 
 # Helper function to create a MySQL connection
