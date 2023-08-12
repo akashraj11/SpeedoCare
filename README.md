@@ -1,4 +1,4 @@
-# SpeedoCare - Clinic Reservation Application
+## SpeedoCare - Clinic Reservation Application
 
 ## Introduction
 
