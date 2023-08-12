@@ -24,8 +24,8 @@ db_config = {
     'user': 'speedocare',
     'password': 'mysqlpass123',
     'database': 'speedocare$speedocare'
-}'''
-
+}
+'''
 # Helper function to create a MySQL connection
 def get_connection():
     try:
