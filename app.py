@@ -6,6 +6,7 @@ from API.routes.LoginRoute import login_blueprint
 from API.routes.notificationRoutes import notification_blueprint
 from API.routes.ClinicRoute import clinic_blueprint
 from API.routes.AppointmentRoute import appointment_blueprint
+from API.routes.ReviewRoute import review_blueprint
 from API.database.models.UserModel import User
 from API.database.connection.config import get_connection
 
@@ -18,6 +19,8 @@ app.register_blueprint(login_blueprint, url_prefix='/speedocare')
 app.register_blueprint(notification_blueprint, url_prefix='/speedocare')
 app.register_blueprint(clinic_blueprint, url_prefix='/speedocare')
 app.register_blueprint(appointment_blueprint, url_prefix='/speedocare')
+app.register_blueprint(review_blueprint, url_prefix='/speedocare')
+
 
 CORS(app)
 
