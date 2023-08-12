@@ -12,15 +12,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/speedocare/appointments",
+					"raw": "http://speedocare.pythonanywhere.com/speedocare/appointments",
 					"protocol": "http",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"speedocare",
+						"pythonanywhere",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"speedocare",
 						"appointments"
@@ -36,7 +34,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"appointment_id\": 1,\r\n    \"patient_id\": 1,\r\n    \"doctor_id\": 1,\r\n    \"clinic_id\": 54321,\r\n    \"booking_date\": \"2023-08-15\",\r\n    \"booking_information\": \"Appointment for a routine check-up\",\r\n    \"comment\": \"No specific comments\",\r\n    \"price\": 100.00,\r\n    \"status\": \"confirmed\",\r\n    \"follow_up_req\": \"Please follow up after two weeks\"\r\n}\r\n",
+					"raw": "{\r\n    \"appointment_id\":5,\r\n    \"patient_id\": 3,\r\n    \"doctor_id\": 1,\r\n    \"clinic_id\": 4,\r\n    \"booking_date\": \"2023-08-10\",\r\n    \"booking_information\": \"Please bring your medical records.\",\r\n    \"comment\": \"Patient has a persistent cough.\",\r\n    \"price\": 100.00,\r\n    \"status\": \"Scheduled\",\r\n    \"follow_up_req\": \"One week follow-up\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -44,15 +42,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/speedocare/appointments",
+					"raw": "http://speedocare.pythonanywhere.com/speedocare/appointments",
 					"protocol": "http",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"speedocare",
+						"pythonanywhere",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"speedocare",
 						"appointments"
@@ -135,6 +131,31 @@
 					"path": [
 						"speedocare",
 						"appointments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET appbyPatientID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/appointments/patient/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"appointments",
+						"patient",
 						"1"
 					]
 				}
