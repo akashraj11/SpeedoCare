@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "0e175b10-0cba-4d23-aa84-b8d9c7b13f3e",
+		"name": "speedocare_Review",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28887753"
+	},
+	"item": [
+		{
+			"name": "GET All_Reviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/reviews",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST CreateReview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"patient_id\": 2,  // Replace with a valid patient ID\r\n    \"doctor_id\": 1,   // Replace with a valid doctor ID\r\n    \"clinic_id\": 4,   // Replace with a valid clinic ID\r\n    \"rating\": 5,\r\n    \"review_text\": \"The doctor was to busy to guide us.\",\r\n    \"reported\": false,\r\n    \"reviewed_for\": \"2023-08-05\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/reviews",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ReviewbyClinicID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/reviews/clinic/4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"reviews",
+						"clinic",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

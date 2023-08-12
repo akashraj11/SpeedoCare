@@ -10,14 +10,14 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 CORS(app)
 
-db_config = {
-     'host': 'localhost',
-     'port': 3306,
-     'user': 'root',
-     'password': 'Rahul',
-     'database': 'speedocare'
- }
-'''
+#db_config = {
+#     'host': 'localhost',
+#     'port': 3306,
+#     'user': 'root',
+#     'password': 'Rahul',
+#     'database': 'speedocare'
+# }
+
 db_config = {
     'host': 'speedocare.mysql.pythonanywhere-services.com',
     'port': 3306,
@@ -25,7 +25,7 @@ db_config = {
     'password': 'mysqlpass123',
     'database': 'speedocare$speedocare'
 }
-'''
+
 # Helper function to create a MySQL connection
 def get_connection():
     try:
