@@ -186,6 +186,46 @@ def update_appointment(appointment_id):
     except Exception as e:
         print("Error:", e)
         return jsonify({"message": "Error updating the appointment"}), 500
+
+
+# Get appointments by patient ID
+@appointment_blueprint.route('/appointments/patient/<int:patient_id>', methods=['GET'])
+def get_appointments_by_patient(patient_id):
+    try:
+        connection = get_connection()
+        if connection is None:
+            return jsonify({"message": "Error connecting to the database"}), 500
+
+        cursor = connection.cursor()
+
+        query = "SELECT * FROM appointments WHERE patient_id = %s"
+        cursor.execute(query, (patient_id,))
+        result = cursor.fetchall()
+
+        appointments_data = []
+        for row in result:
+            appointment = {
+                "appointment_id": row[0],
+                "patient_id": row[1],
+                "doctor_id": row[2],
+                "clinic_id": row[3],
+                "booking_date": row[4],
+                "booking_information": row[5],
+                "comment": row[6],
+                "price": row[7],
+                "status": row[8],
+                "follow_up_req": row[9],
+            }
+            appointments_data.append(appointment)
+
+        cursor.close()
+        connection.close()
+
+        return jsonify(appointments_data), 200
+
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"message": "Error retrieving appointments"}), 500
     
 # Delete an appointment by appointment_id
 @appointment_blueprint.route('/appointments/<int:appointment_id>', methods=['DELETE'])
