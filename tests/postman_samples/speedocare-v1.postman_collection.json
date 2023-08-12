@@ -1,0 +1,453 @@
+{
+	"info": {
+		"_postman_id": "e4f0b122-cf3d-44f5-ba99-e9905a5e3fd6",
+		"name": "speedocare Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28809130"
+	},
+	"item": [
+		{
+			"name": "GET USER",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/users",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/profile",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET USER By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/users/30",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"users",
+						"30"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET USER By Fname, Lname and role",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/users/search?first_name=Jane",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "first_name",
+							"value": "Jane"
+						},
+						{
+							"key": "user_role",
+							"value": "Doctor",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET USER By Doctor and clinic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/users//doctors/clinic/12345",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"users",
+						"",
+						"doctors",
+						"clinic",
+						"12345"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET USER By Doctor and specialization",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/users/doctors/specialization/Ortho",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"users",
+						"doctors",
+						"specialization",
+						"Ortho"
+					],
+					"query": [
+						{
+							"key": "user_role",
+							"value": "Doctor",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST patient",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"john_doe\",\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe\",\r\n    \"contact_no\": \"1234567890\",\r\n    \"email\": \"john.doe@example.com\",\r\n    \"encrypted_password\": \"some_encrypted_password\",\r\n    \"address\": \"123 Main Street\",\r\n    \"date_of_birth\": \"1990-01-01\",\r\n    \"user_role\": \"Patient\",\r\n    \"patient\": {\r\n        \"prescriptions\": \"Take medication A\",\r\n        \"details\": \"Patient details...\",\r\n        \"medical_history\": \"Past medical history...\"\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/users",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"john_doe\",\r\n    \"password\": \"some_encrypted_password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"john_doe\",\r\n    \"password\": \"some_encrypted_password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/logout",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Doctor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"jane_smith\",\r\n    \"first_name\": \"Jane\",\r\n    \"last_name\": \"Smith\",\r\n    \"contact_no\": \"9876543210\",\r\n    \"email\": \"jane.smith@example.com\",\r\n    \"encrypted_password\": \"another_encrypted_password\",\r\n    \"address\": \"456 Oak Avenue\",\r\n    \"date_of_birth\": \"1985-05-15\",\r\n    \"user_role\": \"Doctor\",\r\n    \"doctor\": {\r\n        \"clinic_id\": 12345,\r\n        \"specialization\": \"Cardiology\"\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/users",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST ClinicAdmin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"jack_doe\",\r\n    \"first_name\": \"Jack\",\r\n    \"last_name\": \"Doe\",\r\n    \"contact_no\": \"8765432109\",\r\n    \"email\": \"jack.doe@example.com\",\r\n    \"encrypted_password\": \"yet_another_encrypted_password\",\r\n    \"address\": \"789 Elm Street\",\r\n    \"date_of_birth\": \"1992-12-25\",\r\n    \"user_role\": \"ClinicAdmin\",\r\n    \"clinic_admin\": {\r\n        \"clinic_internal_id\": \"CLINIC123\",\r\n        \"clinic_id\": 12345\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/users",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test cicd",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"jack_doe\",\r\n    \"first_name\": \"Jack\",\r\n    \"last_name\": \"Doe\",\r\n    \"contact_no\": \"8765432109\",\r\n    \"email\": \"jack.doe@example.com\",\r\n    \"encrypted_password\": \"yet_another_encrypted_password\",\r\n    \"address\": \"789 Elm Street\",\r\n    \"date_of_birth\": \"1992-12-25\",\r\n    \"user_role\": \"ClinicAdmin\",\r\n    \"clinic_admin\": {\r\n        \"clinic_internal_id\": \"CLINIC123\",\r\n        \"clinic_id\": 54321\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete by Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"jack_doe\",\r\n    \"first_name\": \"Jack\",\r\n    \"last_name\": \"Doe\",\r\n    \"contact_no\": \"8765432109\",\r\n    \"email\": \"jack.doe@example.com\",\r\n    \"encrypted_password\": \"yet_another_encrypted_password\",\r\n    \"address\": \"789 Elm Street\",\r\n    \"date_of_birth\": \"1992-12-25\",\r\n    \"user_role\": \"ClinicAdmin\",\r\n    \"clinic_admin\": {\r\n        \"clinic_internal_id\": \"CLINIC123\",\r\n        \"clinic_id\": 54321\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/users/28",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"users",
+						"28"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete All Users",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"jack_doe\",\r\n    \"first_name\": \"Jack\",\r\n    \"last_name\": \"Doe\",\r\n    \"contact_no\": \"8765432109\",\r\n    \"email\": \"jack.doe@example.com\",\r\n    \"encrypted_password\": \"yet_another_encrypted_password\",\r\n    \"address\": \"789 Elm Street\",\r\n    \"date_of_birth\": \"1992-12-25\",\r\n    \"user_role\": \"ClinicAdmin\",\r\n    \"clinic_admin\": {\r\n        \"clinic_internal_id\": \"CLINIC123\",\r\n        \"clinic_id\": 54321\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/speedocare/users/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"speedocare",
+						"users",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Users by id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"john_doe\",\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe\",\r\n    \"contact_no\": \"1234567890\",\r\n    \"email\": \"john.doe@example.com\",\r\n    \"encrypted_password\": \"some_encrypted_password\",\r\n    \"address\": \"123 Main Street\",\r\n    \"date_of_birth\": \"1990-01-01\",\r\n    \"user_role\": \"Patient\",\r\n    \"patient\": {\r\n        \"prescriptions\": \"Take Update\",\r\n        \"details\": \"Patient details...\",\r\n        \"medical_history\": \"Past medical history...\"\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/users/30",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"users",
+						"30"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

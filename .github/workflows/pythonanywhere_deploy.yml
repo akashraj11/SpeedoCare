@@ -1,0 +1,38 @@
+# .github/workflows/pythonanywhere_deploy.yml
+
+name: Deploy to PythonAnywhere
+
+on:
+  push:
+    branches:
+      - Akashraj_Dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Deploy to PythonAnywhere
+      run: |
+        # Stop the existing app
+        curl "https://www.pythonanywhere.com/api/v0/user/speedocare/webapps/flask_speedocare_api/stop/" -X POST --user "speedocare:5f424a8cc597c3954ca7b614b0bccac0ca19a4ce"
+      
+        # Deploy the new code
+        rsync -av --delete /home/speedocare/flask_speedocare_api speedocare@ssh.pythonanywhere.com:/home/speedocare/
+      
+        # Start the app
+        curl "https://www.pythonanywhere.com/api/v0/user/speedocare/webapps/flask_speedocare_api/start/" -X POST --user "speedocare:5f424a8cc597c3954ca7b614b0bccac0ca19a4ce"
+      
