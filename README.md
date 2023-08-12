@@ -44,8 +44,10 @@
 
 > Run:
 1. Run the app.py file to run the application
+2. Application hosted at pythonanywhere
 
 ## Testing
 Import the Postman collection from /tests in postman to test the existing APIs after executing the code.
+
 ## Notes
 
