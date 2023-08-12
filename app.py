@@ -23,7 +23,7 @@ app.register_blueprint(review_blueprint, url_prefix='/speedocare')
 
 
 CORS(app)
-
+# Login manager
 login_manager = LoginManager(app)
 
 @login_manager.user_loader
